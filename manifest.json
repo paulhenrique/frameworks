@@ -1,0 +1,15 @@
+{
+  "short_name": "Frameworks",
+  "name": "Frameworks TCC",
+  "icons": [
+    {
+      "src": "img/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#212121",
+  "background_color": "#212121"
+}

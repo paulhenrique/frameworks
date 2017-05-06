@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html manifest="appcache.manifest">
+<head>
+	<title>Analises Comparativas entre frameworks</title>
+	<!-- #212121 -->
+	<!-- android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="icon" sizes="200x200" href="img/logo.jpg">
+	<meta name="theme-color" content="#212121">
+	<link rel="manifest" href="manifest.json">
+	<!-- fim android -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="testes.materializecss/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style type="text/css">
+		.uppercase{
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+<body class="grey darken-4 white-text">
+	<nav class="z-depth-0 grey darken-4">
+		<ul id="slide-out" class="side-nav  black-text">
+			<li><div class="userView">
+				<div class="background">
+					<img height="400" src="img/bg.png">
+				</div>
+				<a href="#"><img class="circle" src="img/paul.jpg"></a>
+				<a href="#"><span class="white-text name">Paulo Henrique</span></a>
+				<a href="#"><span class="white-text email">phvcandido@gmail.com</span></a>
+			</div></li>
+			<ul class="collapsible" data-collapsible="accordion">
+				<li class="bold">
+					<div class="collapsible-header waves-effect waves-teal bold">Materialize</div>
+					<div class="collapsible-body">
+						<ul>
+							<li><a href="testes.materializecss/breadcrumbs.html">Breadcrumbs</a></li>
+							<li><a href="testes.materializecss/tabs2.html">Navigation Tabs</a></li>
+							<li><a href="testes.materializecss/carousel.html">Carousel</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="bold">
+					<div class="collapsible-header waves-effect waves-teal bold">Foundation</div>
+					<div class="collapsible-body">
+						<ul>
+							<li><a href="testes.foundation/breadcrumbs.html">Breadcrumbs</a></li>
+							<li><a href="testes.foundation/tabs2.html">Navigation Tabs</a></li>
+							<li><a href="testes.foundation/carousel.html">Carousel</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="bold">
+					<div class="collapsible-header waves-effect waves-teal bold">Bootstrap</div>
+					<div class="collapsible-body">
+						<ul>
+							<li><a href="testes.bootstrap/breadcrumbs.html">Breadcrumbs</a></li>
+							<li><a href="testes.bootstrap/tabs2.html">Navigation Tabs</a></li>
+							<li><a href="testes.bootstrap/carousel.html">Carousel</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</ul>
+		<a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+	</nav>
+	<div class="container-fluid center">
+		<div class="section">
+			<div class="col s12">
+				<h1><i class="material-icons large">&#xE1B1;</i></h1>
+				<h1 class="thin uppercase">Análises CSS</h1>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="testes.materializecss/js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="testes.materializecss/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+
+	</script>
+
+
+</body>
+</html>
