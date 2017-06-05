@@ -4396,3 +4396,21 @@ a.thumbnail {
 
 .long-delay {
   animation-delay: 700ms !important; }
+  
+blockquote{
+  position: fixed;
+  bottom: 0;
+  background: black;
+  color: white;
+  right: 50px;
+  width: 300px;
+  -webkit-transition: all .99s ease;
+     -moz-transition: all .99s ease;
+      -ms-transition: all .99s ease;
+       -o-transition: all .99s ease;
+          transition: all .99s ease;
+          border:none;
+}
+blockquote:hover{
+  color: gray;
+}
