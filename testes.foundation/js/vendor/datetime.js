@@ -39,7 +39,6 @@
 		var that = this;
 
 		this.element = $(element);
-		this.autoShow = options.autoShow || true;
 		this.closeButton = options.closeButton;
 		this.language = options.language||this.element.data('date-language')||"en";
 		this.language = this.language in dates ? this.language : this.language.split('-')[0]; //Check if "de-DE" style date is available, if not language should fallback to 2 letter code eg "de"
@@ -74,8 +73,6 @@
 							});
 		if (this.closeButton){
 			this.picker.find('a.datepicker-close').show();
-		} else {
-			this.picker.find('a.datepicker-close').hide();
 		}
 
 		if(this.isInline) {
@@ -85,8 +82,6 @@
 		}
 		if (this.isRTL){
 			this.picker.addClass('datepicker-rtl');
-			this.picker.find('.prev i, .next i')
-						.toggleClass('fa fa-chevron-left fa-chevron-right').toggleClass('fa-chevron-left fa-chevron-right');
 		}
 		$(document).on('mousedown', function (e) {
 			// Clicked outside the datepicker, hide it
@@ -164,7 +159,7 @@
 			if (this.isInput) { // single input
 				this._events = [
 					[this.element, {
-						focus: (this.autoShow)? $.proxy(this.show, this):function(){},
+						focus: $.proxy(this.show, this),
 						keyup: $.proxy(this.update, this),
 						keydown: $.proxy(this.keydown, this)
 					}]
@@ -174,7 +169,7 @@
 				this._events = [
 					// For components that are not readonly, allow keyboard nav
 					[this.element.find('input'), {
-						focus: (this.autoShow)? $.proxy(this.show, this):function(){},
+						focus: $.proxy(this.show, this),
 						keyup: $.proxy(this.update, this),
 						keydown: $.proxy(this.keydown, this)
 					}],
@@ -333,8 +328,8 @@
 		  var fullOffsetTop = offset.top + height;
 		  var offsetLeft = offset.left;
 		  // if the datepicker is going to be below the window, show it on top of the input
-		  if((fullOffsetTop + this.picker.outerHeight()) >= $(window).scrollTop() + $(window).height()){
-		  	fullOffsetTop = offset.top - this.picker.outerHeight();
+		  if((fullOffsetTop + this.picker.height()) >= $(window).scrollTop() + $(window).height()){
+		  	fullOffsetTop = offset.top - height - this.picker.height();
 		  }
 
 		  // if the datepicker is going to go past the right side of the window, we want
@@ -860,14 +855,6 @@
 		    monthsShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
 		    today: "Hoje"
 		},
-		pt_br: {
-		    days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
-		    daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
-		    daysMin: ["D", "S", "T", "Q", "Q", "S", "S", "D"],
-		    months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-		    monthsShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-		    today: "Hoje"
-		},
 		it: {
 		    days: ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"],
 		    daysShort: ["Dom", "Lun", "Mar", "Mer", "Gio", "Veb", "Sab", "Dom"],
@@ -906,7 +893,7 @@
 			daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
 			months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
 			monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
-			today: "Сегодня"
+			today: "Сегодня",
 		},
 		cz: {
 			days: ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"],
@@ -915,14 +902,6 @@
 			months: ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"],
 			monthsShort: ["Led", "Úno", "Bře", "Dub", "Kvě", "Čer", "Čnc", "Srp", "Zář", "Říj", "Lis", "Pro"],
 			today: "Dnes"
-		},
-		nl: {
-			days: ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"],
-			daysShort: ["Zon", "Maa", "Din", "Woe", "Don", "Vri", "Zat", "Zon"],
-			daysMin: ["Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"],
-			months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"],
-			monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"],
-			today: "Vandaag"
 		}
 	};
 
@@ -1076,29 +1055,21 @@
 		},
 		headTemplate: '<thead>'+
 							'<tr>'+
-								'<th class="prev"><i class="fa fa-chevron-left fi-arrow-left"/></th>'+
+								'<th class="prev">&lt;</th>'+
 								'<th colspan="5" class="date-switch"></th>'+
-								'<th class="next"><i class="fa fa-chevron-right fi-arrow-right"/></th>'+
+								'<th class="next">&gt;</th>'+
 							'</tr>'+
 						'</thead>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
-		footTemplate: '<tfoot><tr><th colspan="7" class="today"></th></tr></tfoot>',
-		headTemplateDays: '<thead>'+
-							'<tr>'+
-								'<th class="prev"><i class="fa fa-chevron-left fi-arrow-left"/></th>'+
-								'<th colspan="5" class="date-switch"></th>'+
-								'<th class="next"><i class="fa fa-chevron-right fi-arrow-right"/></th>'+
-							'</tr>'+
-						  '</thead>',
-		footTemplateDays: '<tfoot><tr><th colspan="7" class="today"></th></tr></tfoot>'
+		footTemplate: '<tfoot><tr><th colspan="7" class="today"></th></tr></tfoot>'
 	};
 	DPGlobal.template = '<div class="datepicker">'+
 
 							'<div class="datepicker-days">'+
 								'<table class=" table-condensed">'+
-									DPGlobal.headTemplateDays+
+									DPGlobal.headTemplate+
 									'<tbody></tbody>'+
-									DPGlobal.footTemplateDays+
+									DPGlobal.footTemplate+
 								'</table>'+
 							'</div>'+
 							'<div class="datepicker-months">'+
@@ -1115,7 +1086,7 @@
 									DPGlobal.footTemplate+
 								'</table>'+
 							'</div>'+
-							'<a class="button datepicker-close small alert right" style="width:auto;"><i class="fa fa-remove fa-times fi-x"></i></a>'+
+							'<a class="button datepicker-close small alert right" style="width:auto;">&times;</a>'+
 						'</div>';
 
 	$.fn.fdatepicker.DPGlobal = DPGlobal;
