@@ -18,6 +18,6 @@ Aims to analyze and expose interaction problems found in Front-end Framewoks (Fe
 
 ## Access
 
-The paper is disponible in: https://drive.ifsp.edu.br/s/CoQpCEY3zC00jw6
+The paper is available in: https://drive.ifsp.edu.br/s/CoQpCEY3zC00jw6
 
 Access to see the result: https://paulhenrique.github.io/frameworks/
